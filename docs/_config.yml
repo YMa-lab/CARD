@@ -1,0 +1,77 @@
+remote_theme: allejo/jekyll-docs-theme
+name: CARD
+
+project:
+  version: 1.0.0
+  download_url: https://github.com/YingMa0107/CARD/
+  download_text: Download
+
+license:
+  software: GNU License 3.0
+  software_url: https://www.gnu.org/licenses/licenses.en.html
+ 
+links:
+  header:
+    - title: GitHub
+      icon: github
+      brand: true
+      url: https://github.com/YingMa0107/CARD/
+  homepage:
+    - title: View on GitHub
+      icon: github
+      brand: true
+      url: https://github.com/YingMa0107/CARD/
+  footer:
+    - title: GitHub
+      icon: github
+      brand: true
+      url: https://github.com/YingMa0107/CARD/
+    - title: Issues
+      icon: bug
+      url: https://github.com/YingMa0107/CARD/issues?state=open
+
+ui:
+  mode: 'auto' # 'auto', 'dark', 'light'
+  brand:
+    dark: "#00ceff"
+    light: "#a20000"
+  border_color:
+    dark: "#5f5f5f"
+    light: "#dee2e6"
+  header:
+    trianglify: true
+    dark:
+      color1: "#062a48"
+      color2: "#304e67"
+    light:
+      color1: "#080331"
+      color2: "#673051"
+  masthead:
+    color:
+      dark: "#fff"
+      light: "#fff"
+    align:
+      homepage: 'center'
+      page: 'left'
+
+social:
+  github:
+    user: YingMa0107
+    repo: CARD
+  twitter:
+    enabled: false
+    via:
+    hash:
+    account:
+  facebook:
+    enabled: false
+    profileUrl:
+
+analytics:
+  google: UA-123456-1
+
+# Build settings
+markdown: kramdown
+exclude:
+  - LICENSE.md
+  - README.md

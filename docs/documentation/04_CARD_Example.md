@@ -128,7 +128,7 @@ print(CARD_obj@Proportion_CARD[1:2,])
 10x13 4.898859e-06
 ```
 ### 3. Visualize the cell type proportion
-First, we jointly visualize the cell type proportion matrix through scatterpie plot
+First, we jointly visualize the cell type proportion matrix through scatterpie plot. Note that here because the number of spots is relatively small, so jointly visualize the cell type proportion matrix in the scatterpie plot format is duable. We do not recommend visualize this plot when the number of spots is > 500. Instead, we recommend users to visualize the proportion directly, i.e., using the function CARD.visualize.prop(). Details of using this function see the next example.  
 ```r
 ## set the colors. Here, I just use the colors in the manuscript, if the color is not provided, the function will use default color in the package. 
 colors = c("#FFD92F","#4DAF4A","#FCCDE5","#D9D9D9","#377EB8","#7FC97F","#BEAED4",
@@ -269,7 +269,7 @@ CARDfree_obj = CARD_refFree(CARDfree_obj)
 ```
 The results are stored in `CARDfree_obj@Proportion_CARD`. 
 ```r
-## One limitation of reference-free version of CARD is that the cell types inferred from CARDfree do not come with a cell type label. 
+## One limitation of reference-free version of CARD is that the cell types inferred from CARDfree do not come with a cell type label. It might be difficult to interpret the results. 
 print(CARDfree_obj@Proportion_CARD[1:2,])
             CT1          CT2          CT3         CT4          CT5          CT6
 10x10 0.1302085 7.722353e-12 1.503924e-10 6.49290e-06 1.032500e-01 6.556508e-02
@@ -286,6 +286,7 @@ print(CARDfree_obj@Proportion_CARD[1:2,])
 ```
 
 ### 3. Visualization of the results of CARDfree
+Note that here because the number of spots is relatively small, so jointly visualize the cell type proportion matrix in the scatterpie plot format is duable. We do not recommend visualize this plot when the number of spots is > 500. Instead, we recommend users to visualize the proportion directly, i.e., using the function CARD.visualize.prop(). 
 ```r
 colors = c("#FFD92F","#4DAF4A","#FCCDE5","#D9D9D9","#377EB8","#7FC97F","#BEAED4","#FDC086","#FFFF99","#386CB0","#F0027F","#BF5B17","#666666","#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E","#E6AB02","#A6761D")
 ### In order to maximumply match with the original results of CARD, we order the colors to generally match with the results infered by CARD

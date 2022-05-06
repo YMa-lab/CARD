@@ -24,6 +24,11 @@
 #'
 
 CARD.visualize.prop <- function(proportion,spatial_location,ct.visualize = ct.visualize,colors = c("lightblue","lightyellow","red"),NumCols){
+if(is.null(colors)){
+	colors = c("lightblue","lightyellow","red")
+}else{
+	colors = colors
+}
 res_CARD = as.data.frame(proportion)
 res_CARD = res_CARD[,order(colnames(res_CARD))]
 location = as.data.frame(spatial_location)
@@ -67,7 +72,7 @@ return(p)
 #'
 #' @param proportion Data frame, cell type proportion estimated by CARD in either original resolution or enhanced resolution.
 #' @param spatial_location Data frame, spatial location information.
-#' @param colors Vector of color names that you want to use, if NULL, we will use the default color scale c("lightblue","lightyellow","red")
+#' @param colors Vector of color names that you want to use, if NULL, we will use the color palette "Spectral" from RColorBrewer package. 
 #'
 #' @import ggplot2 
 #' @importFrom RColorBrewer brewer.pal
@@ -87,8 +92,10 @@ if(sum(rownames(res_CARD)==rownames(location))!= nrow(res_CARD)){
    stop("The rownames of proportion data does not match with the rownames of spatial location data")
 }
 if(is.null(colors)){
-colors = brewer.pal(11, "Spectral")
-colors = colorRampPalette(colors)(ncol(res_CARD))
+	colors = brewer.pal(11, "Spectral")
+	colors = colorRampPalette(colors)(ncol(res_CARD))
+}else{
+	colors = colors
 }
 data = cbind(res_CARD,location)
 ct.select = colnames(res_CARD)
@@ -115,7 +122,7 @@ return(p)
 #' Visualize the cell type proportion correlation
 #'
 #' @param proportion Data frame, cell type proportion estimated by CARD in either original resolution or enhanced resolution.
-#' @param colors Vector of color names that you want to use, if NULL, we will use the default color scale c("lightblue","lightyellow","red")
+#' @param colors Vector of color names that you want to use, if NULL, we will use the default color scale c("#91a28c","white","#8f2c37")
 #'
 #' @import ggcorrplot 
 #' @importFrom stats cor
@@ -137,7 +144,7 @@ p = suppressMessages(ggcorrplot(cor_CARD, hc.order = F,
    tl.srt = 60,
    tl.cex = 18,
    lab_size = 7,
-   colors = c("#91a28c","white","#8f2c37"))+
+   colors = colors)+
  theme(plot.margin = margin(0.1, 0.1, 0.1, 0.1, "cm"),
     panel.background = element_blank(),
     plot.background = element_blank(),

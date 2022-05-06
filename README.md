@@ -29,7 +29,8 @@ The R package has been installed successfully on Operating systems:
 * Ubuntu 18.04.5 LTS (Bionic Beaver) 
 * Windows 10
 
-
+# Issues
+All feedback, bug reports and suggestions are warmly welcomed! Please make sure to raise issues with a detailed and reproducible exmple and also please provide the output of your sessionInfo() in R! 
 
 How to cite `CARD`
 -------------------

@@ -146,7 +146,9 @@ res_CARD = CARD_object@Proportion_CARD
 res_CARD = res_CARD[,order(colnames(res_CARD))]
 Mean_Cell = getWeightForCell(sc_eset,ct.varname,ct.select,sample.varname,B)
 Mean_Cell = Mean_Cell[,order(colnames(Mean_Cell))]
-Cords = cbind.data.frame(x=as.numeric(sapply(strsplit(rownames(res_CARD),split="x"),"[",1)),y=as.numeric(sapply(strsplit(rownames(res_CARD),split="x"),"[",2)))
+#Cords = cbind.data.frame(x=as.numeric(sapply(strsplit(rownames(res_CARD),split="x"),"[",1)),y=as.numeric(sapply(strsplit(rownames(res_CARD),split="x"),"[",2)))
+########### Will let users maintain their original barcode name of the spots.
+Cords = CARD_object@spatial_location[rownames(res_CARD),]
 rownames(res_CARD) = paste0(Cords$x,"x",Cords$y)
 Cords_new = getHighresCords(Cords,numCell = numCell,shape = shapeSpot)
 MappintSpotCellCor = cor(t(res_CARD),t(Mean_Cell))

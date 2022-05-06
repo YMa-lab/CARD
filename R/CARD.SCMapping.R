@@ -166,6 +166,7 @@ spot = rownames(res_CARD)[ispot]
     df
 },mc.cores = ncore,mc.set.seed = F)
 count_CT = do.call("cbind",count_CT)
+rownames(MapCellCords) = colnames(count_CT)
 sce <- SingleCellExperiment(list(counts=count_CT),
     colData=as.data.frame(MapCellCords[,c("x","y","centerSPOT","centerx","centery","CT","Cell")]),
     rowData=as.data.frame(rownames(count_CT)))

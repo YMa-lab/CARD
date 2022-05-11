@@ -25,7 +25,7 @@ library(CARD)
 
 ```
 The R package has been installed successfully on Operating systems: 
-* macOS Catalina 10.15
+* macOS Catalina 10.15, macOS Monterey 12.3.1
 * Ubuntu 18.04.5 LTS (Bionic Beaver) 
 * Windows 10
 

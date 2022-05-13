@@ -8,7 +8,7 @@ Here are the code for runing analysis in CARD manuscript.
 
 #### Data sets for experiments
 * Raw data can be downloaded through the link listed in the manuscript
-* [All processed data](https://github.com/YingMa0107/CARD-Analysis/tree/master/processed_data)
+* [All processed data](https://drive.google.com/drive/folders/1wRPxn1YI7f1oUw8eC42htXMjTUqyIT1g?usp=sharing)
 
 #### Code for experiments
 * [Simulations](https://github.com/YingMa0107/CARD-Analysis/tree/master/simulations) [with examples on how to simulate the data](https://github.com/YingMa0107/CARD-Analysis/blob/master/simulations/simulate_data.R)

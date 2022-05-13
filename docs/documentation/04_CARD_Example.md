@@ -109,23 +109,23 @@ The results are stored in `CARD_obj@Proportion_CARD`.
 ```r
 print(CARD_obj@Proportion_CARD[1:2,])
       Acinar_cells Ductal_terminal_ductal_like
-10x10 6.370865e-02                  0.02391253
-10x13 7.818267e-08                  0.02996149
+10x10 6.370860e-02                  0.02391251
+10x13 7.818278e-08                  0.02996182
       Ductal_CRISP3_high-centroacinar_like Cancer_clone_A Ductal_MHC_Class_II
-10x10                            0.1801753   4.229925e-04         0.021557695
-10x13                            0.9620444   1.910384e-07         0.006437333
+10x10                            0.1801753   4.229928e-04         0.021557706
+10x13                            0.9620440   1.910394e-07         0.006437371
       Cancer_clone_B      mDCs_A Ductal_APOL1_high-hypoxic   Tuft_cells
-10x10   4.339512e-05 0.011136782              4.967236e-04 2.025107e-03
-10x13   2.319254e-05 0.001013056              3.864940e-06 1.796426e-06
+10x10   4.339480e-05 0.011136707              4.967235e-04 2.025089e-03
+10x13   2.319262e-05 0.001013068              3.864917e-06 1.796433e-06
             mDCs_B         pDCs Endocrine_cells Endothelial_cells Macrophages_A
-10x10 0.0792526605 7.433024e-07    6.848614e-03      1.722855e-01  9.909653e-02
-10x13 0.0004694968 1.566378e-11    3.925406e-11      4.198433e-11  2.766696e-05
-        Mast_cells Macrophages_B T_cells_&_NK_cells    Monocytes         RBCs
-10x10 7.411057e-11  3.090667e-02       4.976257e-06 2.663878e-06 3.841867e-10
-10x13 2.387143e-11  9.499916e-06       1.172386e-11 2.000121e-06 1.009667e-06
+10x10 0.0792525811 7.432979e-07    6.848627e-03      1.722855e-01  9.909662e-02
+10x13 0.0004695018 1.566377e-11    3.925412e-11      4.198468e-11  2.766705e-05
+        Mast_cells Macrophages_B T_cells_&_NK_cells    Monocytes        RBCs
+10x10 7.411147e-11  3.090675e-02       4.976256e-06 2.663846e-06 3.84187e-10
+10x13 2.387132e-11  9.499908e-06       1.172387e-11 2.000116e-06 1.00967e-06
        Fibroblasts
 10x10 3.081225e-01
-10x13 4.898859e-06
+10x13 4.898874e-06
 ```
 ### 3. Visualize the cell type proportion
 First, we jointly visualize the cell type proportion matrix through scatterpie plot. Note that here because the number of spots is relatively small, so jointly visualize the cell type proportion matrix in the scatterpie plot format is duable. We do not recommend users to visualize this plot when the number of spots is > 500. Instead, we recommend users to visualize the proportion directly, i.e., using the function CARD.visualize.prop(). Details of using this function see the next example.  
@@ -156,7 +156,7 @@ print(p2)
 
 ```
 Here is an example output: 
-![Example_Prop](Example_analysis_visualizeProp.jpeg)
+![Example_Prop](Example_analysis_visualizeProp.png)
 
 ### 4. Visualize the cell type proportion correlation 
 ```r
@@ -216,7 +216,7 @@ p5 <- CARD.visualize.prop(
 	NumCols = 4)                                  
 print(p5)
 ```
-![Example_grids](Example_analysis_grid_prop.jpg)
+![Example_grids](Example_analysis_grid_prop.png)
 
 ### 3. Visualize the marker gene expression at an enhanced resolution
 After we obtained cell type proportion at the enhanced resolution by CARD, we can predict the spatial gene expression at the enhanced resolution. The following code is to visualize the marker gene expression at an enhanced resolution.
@@ -271,18 +271,18 @@ The results are stored in `CARDfree_obj@Proportion_CARD`.
 ```r
 ## One limitation of reference-free version of CARD is that the cell types inferred from CARDfree do not come with a cell type label. It might be difficult to interpret the results. 
 print(CARDfree_obj@Proportion_CARD[1:2,])
-            CT1          CT2          CT3         CT4          CT5          CT6
-10x10 0.1302085 7.722353e-12 1.503924e-10 6.49290e-06 1.032500e-01 6.556508e-02
-10x13 0.7566772 1.396240e-23 2.075167e-27 1.77194e-41 2.259987e-37 3.742430e-27
-               CT7          CT8          CT9         CT10       CT11       CT12
-10x10 4.808804e-04 6.179586e-07 1.551588e-08 2.562172e-12 0.05323003 0.21773604
-10x13 2.115067e-25 3.900374e-45 2.174859e-08 2.481742e-02 0.02890133 0.08515376
-            CT13        CT14         CT15         CT16         CT17
-10x10 0.05995502 0.174268711 9.423348e-38 4.659623e-10 8.158578e-11
-10x13 0.09975806 0.004577022 7.602138e-37 1.148611e-04 3.559488e-07
-              CT18         CT19         CT20
-10x10 1.227378e-01 8.951705e-17 7.256082e-02
-10x13 3.900374e-45 1.305530e-19 3.894909e-13
+            CT1          CT2          CT3          CT4          CT5
+10x10 0.1293363 8.155678e-12 1.342871e-10 7.934516e-06 1.029232e-01
+10x13 0.7580073 1.241726e-23 1.981989e-27 3.367648e-40 1.577430e-37
+               CT6          CT7          CT8          CT9         CT10
+10x10 6.081635e-02 3.932038e-04 4.996482e-07 1.862520e-08 4.092203e-12
+10x13 2.162971e-27 1.934013e-25 3.096247e-87 1.903368e-08 2.520620e-02
+            CT11       CT12       CT13        CT14         CT15         CT16
+10x10 0.05317422 0.22235226 0.05971717 0.174335930 5.853567e-38 2.537400e-10
+10x13 0.02868479 0.08371092 0.09967332 0.004615396 4.214875e-37 1.017432e-04
+              CT17         CT18         CT19         CT20
+10x10 8.433169e-11 1.219174e-01 1.077052e-16 7.502541e-02
+10x13 3.462751e-07 7.941545e-64 9.548596e-20 3.760342e-13
 ```
 
 ### 3. Visualization of the results of CARDfree
@@ -311,7 +311,10 @@ metadata(0):
 assays(1): counts
 rownames(16381): A1BG A1CF ... ZZEF1 ZZZ3
 rowData names(1): rownames(count_CT)
-colnames(8560): Cell686 Cell734 ... Cell44322 Cell14883
+colnames(8560): Cell686:10x10:9.97518192091957x9.83765210071579
+  Cell734:10x10:10.1896061601583x9.94081321195699 ...
+  Cell443:9x33:9.4747460691724x32.5644472888671
+  Cell1488:9x33:9.43348842463456x33.4998327996582
 colData names(7): x y ... CT Cell
 reducedDimNames(0):
 mainExpName: NULL

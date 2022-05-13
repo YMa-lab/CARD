@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#define ARMA_64BIT_WORD 1
 #include <RcppArmadillo.h>
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -45,47 +46,47 @@ SEXP CARDfree(SEXP XinputIn, SEXP UIn, SEXP WIn, SEXP phiIn, SEXP max_iterIn, SE
 {    
     try {
         // read in the data
-        arma::fmat Xinput = as<fmat>(XinputIn);
-        arma::fmat U = as<fmat>(UIn);
-        arma::fmat W = as<fmat>(WIn);
-        float phi = as<float>(phiIn);
+        arma::mat Xinput = as<mat>(XinputIn);
+        arma::mat U = as<mat>(UIn);
+        arma::mat W = as<mat>(WIn);
+        double phi = as<double>(phiIn);
         int max_iter = Rcpp::as<int>(max_iterIn);
-        float epsilon = as<float>(epsilonIn);
-        arma::fmat V = as<fmat>(initV);
-        arma::fvec b = as<fvec>(initb);
-        float sigma_e2 = as<float>(initSigma_e2);
-        arma::fvec lambda = as<fvec>(initLambda);
+        double epsilon = as<double>(epsilonIn);
+        arma::mat V = as<mat>(initV);
+        arma::vec b = as<vec>(initb);
+        double sigma_e2 = as<double>(initSigma_e2);
+        arma::vec lambda = as<vec>(initLambda);
         // initialize some useful items
         int nSample = (int)Xinput.n_cols; // number of spatial sample points
         int mGene = (int)Xinput.n_rows; // number of genes in spatial deconvolution
         int k = (int)U.n_cols; // number of cell type
-        arma::fmat L = zeros<fmat>(nSample,nSample);
-        arma::fmat D = zeros<fmat>(nSample,nSample);
-        arma::fmat V_old = zeros<fmat>(nSample,k);
-        arma::fmat UtU = zeros<fmat>(k,k);
-        arma::fmat VtV = zeros<fmat>(k,k);
-        arma::fvec colsum_W = zeros<fvec>(nSample);
-        arma::fmat UtX = zeros<fmat>(k,nSample);
-        arma::fmat XtU = zeros<fmat>(nSample,k);
-        arma::fmat UtXV = zeros<fmat>(k,k);
-        arma::fmat temp = zeros<fmat>(k,k);
-        arma::fmat part1 = zeros<fmat>(nSample,k);
-        arma::fmat part2 = zeros<fmat>(nSample,k);
-        arma::fvec updateV_k = zeros<fvec>(k);
-        arma::fvec updateV_den_k = zeros<fvec>(k);
-        arma::fvec vecOne = ones<fvec>( nSample);
-        arma::fvec diag_UtU = zeros<fvec>(k);
+        arma::mat L = zeros<mat>(nSample,nSample);
+        arma::mat D = zeros<mat>(nSample,nSample);
+        arma::mat V_old = zeros<mat>(nSample,k);
+        arma::mat UtU = zeros<mat>(k,k);
+        arma::mat VtV = zeros<mat>(k,k);
+        arma::vec colsum_W = zeros<vec>(nSample);
+        arma::mat UtX = zeros<mat>(k,nSample);
+        arma::mat XtU = zeros<mat>(nSample,k);
+        arma::mat UtXV = zeros<mat>(k,k);
+        arma::mat temp = zeros<mat>(k,k);
+        arma::mat part1 = zeros<mat>(nSample,k);
+        arma::mat part2 = zeros<mat>(nSample,k);
+        arma::vec updateV_k = zeros<vec>(k);
+        arma::vec updateV_den_k = zeros<vec>(k);
+        arma::vec vecOne = ones<vec>( nSample);
+        arma::vec diag_UtU = zeros<vec>(k);
         bool logicalLogL = FALSE;
-        float obj = 0;
-        float obj_old = 0;
-        float normNMF = 0;
-        float logX = 0;
-        float logV = 0;
-        float alpha = 1.0;
-        float beta = nSample / 2.0;
-        float logSigmaL2 = 0.0;
-        float accu_L = 0.0;
-        float trac_xxt = accu(Xinput % Xinput);
+        double obj = 0;
+        double obj_old = 0;
+        double normNMF = 0;
+        double logX = 0;
+        double logV = 0;
+        double alpha = 1.0;
+        double beta = nSample / 2.0;
+        double logSigmaL2 = 0.0;
+        double accu_L = 0.0;
+        double trac_xxt = accu(Xinput % Xinput);
         
         // initialize values
         // constant matrix caculations for increasing speed 
@@ -101,9 +102,9 @@ SEXP CARDfree(SEXP XinputIn, SEXP UIn, SEXP WIn, SEXP phiIn, SEXP max_iterIn, SE
         diag_UtU = UtU.diag();
         // calculate initial objective function 
         normNMF = trac_xxt - 2.0 * trace(UtXV) + trace(UtU * VtV);
-        logX = -(float)(mGene * nSample) * 0.5 * log(sigma_e2) - 0.5 * (float)(normNMF / sigma_e2);
+        logX = -(double)(mGene * nSample) * 0.5 * log(sigma_e2) - 0.5 * (double)(normNMF / sigma_e2);
         temp = (V.t() - b * vecOne.t()) * L * (V - vecOne * b.t());
-        logV = - (float)(nSample) * 0.5 * sum(log(lambda )) - 0.5 * (sum(temp.diag() / lambda )); 
+        logV = - (double)(nSample) * 0.5 * sum(log(lambda )) - 0.5 * (sum(temp.diag() / lambda )); 
         logSigmaL2 = -(alpha + 1.0) * sum(log(lambda)) - sum(beta / lambda);
         obj_old = logX + logV + logSigmaL2;
         V_old = V;
@@ -111,7 +112,7 @@ SEXP CARDfree(SEXP XinputIn, SEXP UIn, SEXP WIn, SEXP phiIn, SEXP max_iterIn, SE
         for(int i = 1; i <= max_iter; ++i) {
             logV = 0.0;  
             b = sum(V.t() * L, 1) / accu_L;
-            lambda = (temp.diag() / 2.0 + beta ) / (float(nSample) / 2.0 + alpha + 1.0);  
+            lambda = (temp.diag() / 2.0 + beta ) / (double(nSample) / 2.0 + alpha + 1.0);  
             part1 = sigma_e2 * (D * V + phi * colsum_W * b.t());
             part2 = sigma_e2 * (phi * W * V + colsum_W * b.t());
             for(int nCT = 0; nCT < k; ++nCT){
@@ -128,14 +129,14 @@ SEXP CARDfree(SEXP XinputIn, SEXP UIn, SEXP WIn, SEXP phiIn, SEXP max_iterIn, SE
             UtXV = UtX * V;
 
             normNMF = trac_xxt - 2.0 * trace(UtXV) + trace(UtU * VtV);
-            sigma_e2 = normNMF / (float)(mGene * nSample);
+            sigma_e2 = normNMF / (double)(mGene * nSample);
             temp = (V.t() - b * vecOne.t()) * L * (V - vecOne * b.t());
-            logX = -(float)(nSample * mGene) * 0.5 * log(sigma_e2) - 0.5 * (float)(normNMF / sigma_e2);
-            logV = - (float)(nSample) * 0.5 * sum(log(lambda))- 0.5 * (sum(temp.diag() / lambda )); 
+            logX = -(double)(nSample * mGene) * 0.5 * log(sigma_e2) - 0.5 * (double)(normNMF / sigma_e2);
+            logV = - (double)(nSample) * 0.5 * sum(log(lambda))- 0.5 * (sum(temp.diag() / lambda )); 
             logSigmaL2 = -(alpha + 1.0) * sum(log(lambda)) - sum(beta / lambda);
             obj = logX + logV + logSigmaL2;
             logicalLogL = (obj > obj_old) && (abs(obj - obj_old) * 2.0 / abs(obj + obj_old) < epsilon);
-            if(isnan(obj) || (sqrt(accu((V - V_old) % (V - V_old)) / float(nSample * k))  < epsilon) || logicalLogL){
+            if(isnan(obj) || (sqrt(accu((V - V_old) % (V - V_old)) / double(nSample * k))  < epsilon) || logicalLogL){
                if(i > 5){ // run at least 5 iterations 
                break;
            }

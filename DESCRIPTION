@@ -10,13 +10,15 @@ Description: CARD is a reference-based deconvolution method that estimates cell 
 License: GPL (>= 3)
 Encoding: UTF-8
 RoxygenNote: 7.1.2
-Imports: Rcpp (>= 1.0.7),RcppArmadillo,SingleCellExperiment,SummarizedExperiment, methods, MCMCpack,
-        fields, wrMisc, concaveman, sp, dplyr, sf, Matrix, RANN,
-        ggplot2, reshape2, RColorBrewer, scatterpie, grDevices,
-        ggcorrplot, stats, nnls, pbmcapply, RcppML, NMF, spatstat,
-        gtools
+Imports: Rcpp (>=
+        1.0.7),RcppArmadillo,SingleCellExperiment,SummarizedExperiment,
+        methods, MCMCpack, fields, wrMisc, concaveman, sp, dplyr, sf,
+        Matrix, RANN, ggplot2, reshape2, RColorBrewer, scatterpie,
+        grDevices, ggcorrplot, stats, nnls, pbmcapply, RcppML, NMF,
+        spatstat, gtools
 LinkingTo: Rcpp, RcppArmadillo
-Suggests: 
-    rmarkdown,
-    knitr
+Suggests: rmarkdown, knitr
 VignetteBuilder: knitr
+NeedsCompilation: yes
+Packaged: 2022-05-10 20:46:17 UTC; yingma
+Depends: R (>= 3.5.0)

@@ -212,7 +212,7 @@ p5 <- CARD.visualize.prop(
 	proportion = CARD_obj@refined_prop,                         
 	spatial_location = location_imputation,            
 	ct.visualize = ct.visualize,                    
-	colors = c("#440154FF","#21908CFF","#FDE725FF"),    
+	colors = c("lightblue","lightyellow","red"),    
 	NumCols = 4)                                  
 print(p5)
 ```

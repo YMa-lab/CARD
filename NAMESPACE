@@ -10,7 +10,7 @@ import(Matrix)
 import(methods)
 import(ggplot2)
 import(ggcorrplot)
-import(spatstat)
+
 
 
 importFrom("SummarizedExperiment","assays")
@@ -35,4 +35,5 @@ importFrom("gtools","mixedsort")
 importFrom("RcppML","nmf")
 importFrom("NMF","nmf")
 importFrom("wrMisc","rowGrpMeans")
+importFrom("spatstat.random","runifdisc")
 

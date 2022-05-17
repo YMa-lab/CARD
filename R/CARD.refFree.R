@@ -120,8 +120,9 @@ OptimalRes = ResList[[Optimal]]
 cat(paste0("## Deconvolution Finish! ...\n"))
 CARDfree_object@info_parameters$phi = OptimalPhi
 CARDfree_object@Proportion_CARD = sweep(OptimalRes$V,1,rowSums(OptimalRes$V),"/")
-CARDfree_object@algorithm_matrix = list(B = OptimalRes$B, Xinput_norm = Xinput_norm * mean_X / 1e-01, Res = OptimalRes)
+CARDfree_object@algorithm_matrix = list(B = OptimalRes$B * mean_B / 1e-01, Xinput_norm = Xinput_norm * mean_X / 1e-01, Res = OptimalRes)
 CARDfree_object@spatial_location = spatial_location
+CARDfree_object@estimated_refMatrix = OptimalRes$B * mean_B / 1e-01
 return(CARDfree_object)
 }
 

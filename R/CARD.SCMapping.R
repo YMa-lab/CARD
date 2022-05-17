@@ -43,7 +43,7 @@ getWeightForCell <- function(sc_eset,ct.varname,ct.select,sample.varname,B){
 #' @param numCell a numeric value indicating the number of single cells in each measured location, we suggest 20 for ST technology, 7 for 10x Viisum and 2 for Slide-seq
 #' @param shape a character indicating whether the sampled spatial coordinates for single cells locating in a Square-like region or a Circle-like region. The center of this region is the measured spatial location in the non-single cell resolution spatial transcriptomics data. The default is "Square", the other shape is "Circle"
 
-#' @import spatstat
+#' @importFrom spatstat.random runifdisc
 #' @importFrom fields rdist
 #' @importFrom stats runif
 #' @return Returns a dataframe with the sampled spatial location information for each single cell 

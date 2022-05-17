@@ -302,6 +302,7 @@ We also extended CARD to facilitate the construction of single-cell resolution s
 - shapeSpot: a character indicating whether the sampled spatial coordinates for single cells locating in a Square-like region or a Circle-like region. The center of this region is the measured spatial location in the non-single cell resolution spatial transcriptomics data. The default is "Square", and the other option is "Circle"
 - numCell: a numeric value indicating the number of cores used to accelerate the procedure.
 ```r
+#### Note that here the shapeSpot is the user defined variable which indicates the capturing area of single cells. Details see above.
 scMapping = CARD_SCMapping(CARD_obj,shapeSpot="Square",numCell=20,ncore=10)
 print(scMapping)
 ### the output

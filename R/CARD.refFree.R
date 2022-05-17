@@ -123,6 +123,8 @@ CARDfree_object@Proportion_CARD = sweep(OptimalRes$V,1,rowSums(OptimalRes$V),"/"
 CARDfree_object@algorithm_matrix = list(B = OptimalRes$B * mean_B / 1e-01, Xinput_norm = Xinput_norm * mean_X / 1e-01, Res = OptimalRes)
 CARDfree_object@spatial_location = spatial_location
 CARDfree_object@estimated_refMatrix = OptimalRes$B * mean_B / 1e-01
+rownames(CARDfree_object@estimated_refMatrix) = rownames(B)
+colnames(CARDfree_object@estimated_refMatrix) = colnames(B)
 return(CARDfree_object)
 }
 

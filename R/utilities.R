@@ -127,7 +127,7 @@ if (is.null(ct.varname)){
 		cat(paste0("No cell types selected, we will use all the cell types in the scRNA-seq data\n"))
 		ct.select <- unique(sc_meta[, ct.varname])
 	}
-ct.select <- ct.select[!is.na(ct.select)]
+ct.select <- as.character(ct.select[!is.na(ct.select)])
 sc_eset = sc_QC(sc_countMat,sc_meta,ct.varname,ct.select,sample.varname)
 #### Check the spatial count dataset
 #### QC on spatial dataset

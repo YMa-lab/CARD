@@ -23,12 +23,15 @@
 #' @export
 #'
 createscRef <- function(x, ct.select = NULL, ct.varname, sample.varname = NULL){
+library(MuSiC)
 if (is.null(ct.select)) {
         ct.select <- unique(colData(x)[, ct.varname])
 }
 ct.select <- ct.select[!is.na(ct.select)]
+#countMat <- as.matrix(assays(x)$counts)
 countMat <- as(assays(x)$counts,"sparseMatrix")
 ct.id <- droplevels(as.factor(colData(x)[, ct.varname]))
+#if(length(unique(colData(x)[,sample.varname])) > 1){
 if(is.null(sample.varname)){
   colData(x)$sampleID = "Sample"
   sample.varname = "sampleID"
@@ -44,20 +47,29 @@ colSums_countMat_Ct_wide$sample.id <- NULL
 tbl <- table(sample.id,ct.id)
 colSums_countMat_Ct_wide = colSums_countMat_Ct_wide[,match(colnames(tbl),colnames(colSums_countMat_Ct_wide))]
 colSums_countMat_Ct_wide = colSums_countMat_Ct_wide[match(rownames(tbl),rownames(colSums_countMat_Ct_wide)),]
-
 S_JK <- colSums_countMat_Ct_wide / tbl
 S_JK <- as.matrix(S_JK)
 S_JK[S_JK == 0] = NA
 S_JK[!is.finite(S_JK)] = NA
 S = colMeans(S_JK, na.rm = TRUE)
 S = S[match(unique(ct.id),names(S))]
-#library("wrMisc")
-# Theta_S <- sapply(unique(ct_sample.id),ćfunction(ict.sample) {
-#             y = countMat[, ct_sample.id %in% ict.sample,drop = F]
-#             rsm = rowSums(y)
-#             rsm / sum(rsm)
-#             })
+library("wrMisc")
+if(nrow(countMat) > 10000 & ncol(countMat) > 50000){ ### to save memory 
+seqID = seq(1,nrow(countMat),by = 10000)
+Theta_S_rowMean = NULL
+for(igs in seqID){
+    if(igs != seqID[length(seqID)]){
+Theta_S_rowMean_Tmp <- rowGrpMeans(as.matrix(countMat[(igs:(igs+9999)),]), grp = ct_sample.id, na.rm = TRUE)
+}else{
+    Theta_S_rowMean_Tmp <- rowGrpMeans(as.matrix(countMat[igs:nrow(countMat),]), grp = ct_sample.id, na.rm = TRUE)
+
+}
+Theta_S_rowMean <- rbind(Theta_S_rowMean,Theta_S_rowMean_Tmp)
+
+}
+}else{
 Theta_S_rowMean <- rowGrpMeans(as.matrix(countMat), grp = ct_sample.id, na.rm = TRUE)
+}
 tbl_sample = table(ct_sample.id)
 tbl_sample = tbl_sample[match(colnames(Theta_S_rowMean),names(tbl_sample))]
 Theta_S_rowSums <- sweep(Theta_S_rowMean,2,tbl_sample,"*")

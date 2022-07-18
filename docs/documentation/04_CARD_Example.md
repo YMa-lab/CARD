@@ -63,6 +63,8 @@ Cell4  Cell4 Ductal_CRISP3_high-centroacinar_like    sample1
 ```
 The scRNAseq meta data must be in the format of data frame while each row represents a cell. The rownames of the scRNAseq meta data should match exactly with the column names of the scRNAseq count data. The sc_meta data must contain the column indicating the cell type assignment for each cell (e.g., "cellType" column in the example sc_meta data). Sample/subject information should be provided, if there is only one sample, we can add a column by ```sc_meta$sampleInfo = "sample1"```.
 
+We suggest the users to check their single cell RNASeq data carefully before running CARD. We suggest the users to input the single cell RNAseq data with each cell type containing at least 2 cells. i.e. print(table(sc_meta$cellType,useNA = "ifany"))
+
 ## Cell Type Deconvolution
 ```r
 library(CARD)

@@ -111,8 +111,12 @@ counts = assays(sc_eset)$counts
 counts = counts[rownames(counts) %in% gene1,]
 sd_within = sapply(ct.select,function(ict){
   temp = counts[,colData(sc_eset)[,ct.varname] == ict]
+  if(!is.null(ncol(temp))){
   apply(temp,1,var) / apply(temp,1,mean)
-  })
+  }else{
+  var(temp) / mean(temp)
+  }
+})
 ##### remove the outliers that have high dispersion across cell types
 gene2 = rownames(sd_within)[apply(sd_within,1,mean,na.rm = T) < quantile(apply(sd_within,1,mean,na.rm = T),prob = 0.99)]
 return(gene2)

@@ -109,12 +109,14 @@ gene1 = unique(unlist(gene1))
 gene1 = intersect(gene1,commonGene)
 counts = assays(sc_eset)$counts
 counts = counts[rownames(counts) %in% gene1,]
+##### only check the cell type that contains at least 2 cells
+ct.select = names(table(colData(sc_eset)[,ct.varname]))[table(colData(sc_eset)[,ct.varname]) > 1]
 sd_within = sapply(ct.select,function(ict){
   temp = counts[,colData(sc_eset)[,ct.varname] == ict]
   apply(temp,1,var) / apply(temp,1,mean)
-})
+  })
 ##### remove the outliers that have high dispersion across cell types
-gene2 = rownames(sd_within)[apply(sd_within,1,mean,na.rm = T) < quantile(apply(sd_within,1,mean,na.rm = T),prob = 0.99)]
+gene2 = rownames(sd_within)[apply(sd_within,1,mean,na.rm = T) < quantile(apply(sd_within,1,mean,na.rm = T),prob = 0.99,na.rm = T)]
 return(gene2)
 }
 

@@ -84,7 +84,7 @@ return(p)
 #' @export
 #'
 
-CARD.visualize.pie <- function(proportion,spatial_location,colors = colors){
+CARD.visualize.pie <- function(proportion,spatial_location,colors = NULL){
 res_CARD = as.data.frame(proportion)
 res_CARD = res_CARD[,mixedsort(colnames(res_CARD))]
 location = as.data.frame(spatial_location)

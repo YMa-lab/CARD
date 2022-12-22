@@ -68,6 +68,67 @@ theme(plot.margin = margin(0.1, 0.1, 0.1, 0.1, "cm"),
 return(p)
 }
 
+#' Visualize the spatial distribution of two cell type proportions on the same plot 
+#'
+#' @param proportion Data frame, cell type proportion estimated by CARD in either original resolution or enhanced resolution.
+#' @param spatial_location Data frame, spatial location information.
+#' @param ct2.visualize Vector of selected two cell type names that are interested to visualize, here we only focus on two cell types
+#' @param colors list of color names that you want to use for each cell type, if NULL, we will use the default color scale list
+#' list(c("lightblue","lightyellow","red"),c("lightblue","lightyellow","black")
+#'
+#' @import ggplot2 
+#' @importFrom reshape2 melt
+#' @return Returns a ggplot2 figure. 
+#'
+#' @export
+#'
+CARD.visualize.prop.2CT <- function(proportion,spatial_location,ct2.visualize = ct2.visualize,colors = NULL){
+if(is.null(colors)){
+	colors = list(c("lightblue","lightyellow","red"),
+c("lightblue","lightyellow","black"))
+}else{
+	colors = colors
+}
+res_CARD = as.data.frame(proportion)
+res_CARD = res_CARD[,order(colnames(res_CARD))]
+location = as.data.frame(spatial_location)
+if(sum(rownames(res_CARD)==rownames(location))!= nrow(res_CARD)){
+   stop("The rownames of proportion data does not match with the rownames of spatial location data")
+}
+ct.select = ct2.visualize
+res_CARD = res_CARD[,ct.select]
+res_CARD_scale = as.data.frame(apply(res_CARD,2,function(x){
+    (x - min(x)) / (max(x) - min(x))
+} ))
+res_CARD_scale$x = as.numeric(location$x)
+res_CARD_scale$y = as.numeric(location$y)
+mData = melt(res_CARD_scale,id.vars = c("x","y"))
+colnames(mData)[3] <- "Cell_Type"
+b = c(0,1)
+p = suppressMessages(ggplot() + 
+geom_point(data=mData[mData$Cell_Type == ct2.visualize[1],], aes(x=x, y=y, color=value), shape=21, size=5) +
+scale_color_gradientn(colours = colors[[1]]) +
+geom_point(data=mData[mData$Cell_Type == ct2.visualize[2],], aes(x=x, y=y, fill = value), color = "white",shape=22, size=2) +
+scale_fill_gradientn(colours = colors[[2]]) +
+#scale_color_viridis_c(option = 2)+
+scale_x_discrete(expand = c(0, 1)) + scale_y_discrete(expand = c(0,1))+ 
+coord_fixed()+
+theme(plot.margin = margin(0.1, 0.1, 0.1, 0.1, "cm"),
+    #legend.position=c(0.14,0.76),
+    panel.background = element_blank(),
+    plot.background = element_blank(),
+    panel.border = element_rect(colour = "grey89", fill=NA, size=0.5),
+    axis.text =element_blank(),
+    axis.ticks =element_blank(),
+    axis.title =element_blank(),
+    legend.title=element_text(size = 14,face="bold"),
+    legend.text=element_text(size = 11),
+    strip.text = element_text(size = 12,face="bold"),
+    #legend.key = element_rect(colour = "transparent", fill = "white"),
+    legend.key.size = unit(0.45, 'cm')))
+return(p)
+}
+
 #' Visualize the spatial distribution of cell type proportion in a geom scatterpie plot
 #'
 #' @param proportion Data frame, cell type proportion estimated by CARD in either original resolution or enhanced resolution.

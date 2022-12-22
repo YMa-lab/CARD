@@ -124,8 +124,8 @@ theme(plot.margin = margin(0.1, 0.1, 0.1, 0.1, "cm"),
     legend.title=element_text(size = 14,face="bold"),
     legend.text=element_text(size = 11),
     strip.text = element_text(size = 12,face="bold"),
-    #legend.key = element_rect(colour = "transparent", fill = "white"),
-    legend.key.size = unit(0.45, 'cm')))
+    legend.key.size = unit(0.45, 'cm'))+
+    labs(colour=ct2.visualize[1],fill = ct2.visualize[2]))
 return(p)
 }
 

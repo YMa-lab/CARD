@@ -37,9 +37,13 @@ if(sum(rownames(res_CARD)==rownames(location))!= nrow(res_CARD)){
 }
 ct.select = ct.visualize
 res_CARD = res_CARD[,ct.select]
+if(!is.null(ncol(res_CARD))){
 res_CARD_scale = as.data.frame(apply(res_CARD,2,function(x){
     (x - min(x)) / (max(x) - min(x))
-} ))
+} ))}else{
+res_CARD_scale = as.data.frame((res_CARD - min(res_CARD)) / (max(res_CARD) - min(res_CARD)))
+colnames(res_CARD_scale) = ct.visualize
+}
 res_CARD_scale$x = as.numeric(location$x)
 res_CARD_scale$y = as.numeric(location$y)
 mData = melt(res_CARD_scale,id.vars = c("x","y"))

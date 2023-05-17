@@ -129,7 +129,7 @@ print(CARD_obj@Proportion_CARD[1:2,])
 10x10 3.081225e-01
 10x13 4.898874e-06
 ```
-### 3. Visualize the cell type proportion
+### 3. Visualize the proportion for each cell type
 First, we jointly visualize the cell type proportion matrix through scatterpie plot. Note that here because the number of spots is relatively small, so jointly visualize the cell type proportion matrix in the scatterpie plot format is duable. We do not recommend users to visualize this plot when the number of spots is > 500. Instead, we recommend users to visualize the proportion directly, i.e., using the function CARD.visualize.prop(). Details of using this function see the next example.  
 ```r
 ## set the colors. Here, I just use the colors in the manuscript, if the color is not provided, the function will use default color in the package. 
@@ -160,10 +160,26 @@ print(p2)
 Here is an example output: 
 ![Example_Prop](Example_analysis_visualizeProp.png)
 
-### 4. Visualize the cell type proportion correlation 
-```r
-p3 <- CARD.visualize.Cor(CARD_obj@Proportion_CARD,colors = NULL) # if not provide, we will use the default colors
+### 4. Visualize the proportion for two cell types
+Motivated by this github post https://github.com/YingMa0107/CARD/issues/25#issuecomment-1550231037, we added a new visualization function to visualize the distribution of two cell types on the same post.  
+
+```
+## visualize the spatial distribution of two cell types on the same plot
+p3 = CARD.visualize.prop.2CT(
+proportion = CARD_obj@Proportion_CARD,                             ### Cell type proportion estimated by CARD
+spatial_location = CARD_obj@spatial_location,                      ### spatial location information
+ct2.visualize = c("Cancer_clone_A","Cancer_clone_B"),              ### two cell types you want to visualize
+colors = list(c("lightblue","lightyellow","red"),c("lightblue","lightyellow","black")))       ### two color scales                             
 print(p3)
+
+```
+Here is an example output:
+![Example_2Prop](Example_analysis_visualizeProp_2CT.png)
+
+### 5. Visualize the cell type proportion correlation 
+```r
+p4 <- CARD.visualize.Cor(CARD_obj@Proportion_CARD,colors = NULL) # if not provide, we will use the default colors
+print(p4)
 ```
 Here is an example output: 
 <p align="left"> 
@@ -193,14 +209,14 @@ location_imputation = cbind.data.frame(x=as.numeric(sapply(strsplit(rownames(CAR
 	y=as.numeric(sapply(strsplit(rownames(CARD_obj@refined_prop),split="x"),"[",2)))
 rownames(location_imputation) = rownames(CARD_obj@refined_prop)
 library(ggplot2)
-p4 <- ggplot(location_imputation, 
+p5 <- ggplot(location_imputation, 
        aes(x = x, y = y)) + geom_point(shape=22,color = "#7dc7f5")+
 theme(plot.margin = margin(0.1, 0.1, 0.1, 0.1, "cm"),
     legend.position="bottom",
     panel.background = element_blank(),
     plot.background = element_blank(),
     panel.border = element_rect(colour = "grey89", fill=NA, size=0.5))
-print(p4)
+print(p5)
 ```
 Here is the example of the newly grided spatial locations. The shape outline is detected well. 
 <p align="center"> 
@@ -210,38 +226,38 @@ Here is the example of the newly grided spatial locations. The shape outline is 
 ### 2. Visualize the cell type proportion at an enhanced resolution
 Now we can use the same `CARD.visualize.prop` function to visualize the cell type proportion at the enhanced resolution. But this time, the input of the function should be the imputed cell typr propotion and corresponding newly grided spatial locations.
 ```r                                   
-p5 <- CARD.visualize.prop(
+p6 <- CARD.visualize.prop(
 	proportion = CARD_obj@refined_prop,                         
 	spatial_location = location_imputation,            
 	ct.visualize = ct.visualize,                    
 	colors = c("lightblue","lightyellow","red"),    
 	NumCols = 4)                                  
-print(p5)
+print(p6)
 ```
 ![Example_grids](Example_analysis_grid_prop.png)
 
 ### 3. Visualize the marker gene expression at an enhanced resolution
 After we obtained cell type proportion at the enhanced resolution by CARD, we can predict the spatial gene expression at the enhanced resolution. The following code is to visualize the marker gene expression at an enhanced resolution.
 ```r                                   
-p6 <- CARD.visualize.gene(
+p7 <- CARD.visualize.gene(
 	spatial_expression = CARD_obj@refined_expression,
 	spatial_location = location_imputation,
 	gene.visualize = c("Tm4sf1","S100a4","Tff3","Apol1","Crisp3","CD248"),
 	colors = NULL,
 	NumCols = 6)
-print(p6)
+print(p7)
 ```
 ![Example_grid_Gene](Example_analysis_grid_Gene.png)
 
 Now, compare with the original resolution, CARD facilitates the construction of a refined spatial tissue map with a resolution much higher than that measured in the original study.
 ```r                                   
-p7 <- CARD.visualize.gene(
+p8 <- CARD.visualize.gene(
 	spatial_expression = CARD_obj@spatial_countMat,
 	spatial_location = CARD_obj@spatial_location,
 	gene.visualize = c("Tm4sf1","S100a4","Tff3","Apol1","Crisp3","CD248"),
 	colors = NULL,
 	NumCols = 6)
-print(p7)
+print(p8)
 ```
 ![Example_grid_Gene](Example_analysis_Original_Gene.png)
 
@@ -294,8 +310,8 @@ colors = c("#FFD92F","#4DAF4A","#FCCDE5","#D9D9D9","#377EB8","#7FC97F","#BEAED4"
 ### In order to maximumply match with the original results of CARD, we order the colors to generally match with the results infered by CARD
 CARDfree_obj@Proportion_CARD = CARDfree_obj@Proportion_CARD[,c(8,10,14,2,1,6,12,18,7,13,20,19,16,17,11,15,4,9,3,5)]
 colnames(CARDfree_obj@Proportion_CARD) = paste0("CT",1:20)
-p8 <- CARD.visualize.pie(CARDfree_obj@Proportion_CARD,CARDfree_obj@spatial_location,colors = colors)
-print(p8)
+p9 <- CARD.visualize.pie(CARDfree_obj@Proportion_CARD,CARDfree_obj@spatial_location,colors = colors)
+print(p9)
 ```
 ![Example_CARDfree](Example_analysis_CARDfree_prop.png)
 ## Extension of CARD for single cell resolution mapping
@@ -336,7 +352,7 @@ df = MapCellCords
 colors = c("#8DD3C7","#CFECBB","#F4F4B9","#CFCCCF","#D1A7B9","#E9D3DE","#F4867C","#C0979F",
 	"#D5CFD6","#86B1CD","#CEB28B","#EDBC63","#C59CC5","#C09CBF","#C2D567","#C9DAC3","#E1EBA0",
 	"#FFED6F","#CDD796","#F8CDDE")
-p9 = ggplot(df, aes(x = x, y = y, colour = CT)) + 
+p10 = ggplot(df, aes(x = x, y = y, colour = CT)) + 
     geom_point(size = 3.0) +
     scale_colour_manual(values =  colors) +
     #facet_wrap(~Method,ncol = 2,nrow = 3) + 
@@ -354,6 +370,6 @@ p9 = ggplot(df, aes(x = x, y = y, colour = CT)) +
     legend.key.size = unit(0.45, 'cm'),
     strip.text = element_text(size = 15,face="bold"))+
                                 guides(color=guide_legend(title="Cell Type"))
-print(p9)
+print(p10)
 ```
 ![Example_grids](Example_analysis_scMapping.png)

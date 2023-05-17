@@ -177,7 +177,6 @@ Here is an example output:
 <p align="center"> 
 <img src="Example_analysis_visualizeProp_2CT.png" width="500">
 </p>
-
 ### 5. Visualize the cell type proportion correlation 
 ```r
 p4 <- CARD.visualize.Cor(CARD_obj@Proportion_CARD,colors = NULL) # if not provide, we will use the default colors
@@ -187,6 +186,7 @@ Here is an example output:
 <p align="left"> 
 <img src="Example_analysis_visualizeCor.png" width="700">
 </p>
+
 ## Refined spatial map
 A unique feature of CARD is its ability to model the spatial correlation in cell type composition across tissue locations, thus enabling spatially informed cell type deconvolution. Modeling spatial correlation allows us to not only accurately infer the cell type composition on each spatial location, but also impute cell type compositions and gene expression levels on unmeasured tissue locations, facilitating the construction of a refined spatial tissue map with a resolution much higher than that measured in the original study.
 Specifically, CARD constructed a refined spatial map through the function `CARD.imputation`. The essential inputs are:

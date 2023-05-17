@@ -184,7 +184,7 @@ p4 <- CARD.visualize.Cor(CARD_obj@Proportion_CARD,colors = NULL) # if not provid
 print(p4)
 ```
 Here is an example output: 
-<p align="left"> 
+<p align="center"> 
 <img src="Example_analysis_visualizeCor.png" width="700">
 </p>
 ## Refined spatial map

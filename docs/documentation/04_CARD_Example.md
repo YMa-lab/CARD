@@ -174,7 +174,9 @@ print(p3)
 
 ```
 Here is an example output:
-![Example_2Prop](Example_analysis_visualizeProp_2CT.png)
+<p align="left"> 
+<img src="Example_analysis_visualizeProp_2CT.png" width="700">
+</p>
 
 ### 5. Visualize the cell type proportion correlation 
 ```r

@@ -174,8 +174,8 @@ print(p3)
 
 ```
 Here is an example output:
-<p align="left"> 
-<img src="Example_analysis_visualizeProp_2CT.png" width="700">
+<p align="center"> 
+<img src="Example_analysis_visualizeProp_2CT.png" width="500">
 </p>
 
 ### 5. Visualize the cell type proportion correlation 
@@ -184,7 +184,7 @@ p4 <- CARD.visualize.Cor(CARD_obj@Proportion_CARD,colors = NULL) # if not provid
 print(p4)
 ```
 Here is an example output: 
-<p align="center"> 
+<p align="left"> 
 <img src="Example_analysis_visualizeCor.png" width="700">
 </p>
 ## Refined spatial map

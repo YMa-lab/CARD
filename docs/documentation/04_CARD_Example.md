@@ -153,7 +153,8 @@ p2 <- CARD.visualize.prop(
 	spatial_location = CARD_obj@spatial_location, 
 	ct.visualize = ct.visualize,                 ### selected cell types to visualize
 	colors = c("lightblue","lightyellow","red"), ### if not provide, we will use the default colors
-	NumCols = 4)                                 ### number of columns in the figure panel
+	NumCols = 4,                                 ### number of columns in the figure panel
+        pointSize = 3.0)                             ### point size in ggplot2 scatterplot  
 print(p2)
 
 ```

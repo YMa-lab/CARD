@@ -23,7 +23,7 @@
 #' @export
 #'
 
-CARD.visualize.prop <- function(proportion,spatial_location,ct.visualize = ct.visualize,colors = c("lightblue","lightyellow","red"),NumCols){
+CARD.visualize.prop <- function(proportion,spatial_location,ct.visualize = ct.visualize,colors = c("lightblue","lightyellow","red"),NumCols, pointSize = 3.0){
 if(is.null(colors)){
 	colors = c("lightblue","lightyellow","red")
 }else{
@@ -50,7 +50,7 @@ mData = melt(res_CARD_scale,id.vars = c("x","y"))
 colnames(mData)[3] <- "Cell_Type"
 b = c(0,1)
 p = suppressMessages(ggplot(mData, aes(x, y)) + 
-geom_point(aes(colour = value),size = 3.0) +
+geom_point(aes(colour = value),size = pointSize) +
 scale_color_gradientn(colours = colors) + 
 #scale_color_viridis_c(option = 2)+
 scale_x_discrete(expand = c(0, 1)) + scale_y_discrete(expand = c(0,1))+ 

@@ -36,7 +36,7 @@ commonGene = intersect(toupper(rownames(spatial_countMat)),toupper(marker))
 #### remove mitochondrial and ribosomal genes
 commonGene  = commonGene[!(commonGene %in% commonGene[grep("mt-",commonGene)])]
 if(length(commonGene) < numK * 10){
-  cat(paste0("## STOP! The average number of unique marker genes for each cell type is less than 20 ...\n"))
+  stop(paste0("## STOP! The average number of unique marker genes for each cell type is less than 20 ...\n"))
 }
 Xinput = spatial_countMat[order(rownames(spatial_countMat)),]
 Xinput = Xinput[order(rownames(Xinput)),]

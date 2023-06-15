@@ -136,7 +136,11 @@ First, we jointly visualize the cell type proportion matrix through scatterpie p
 colors = c("#FFD92F","#4DAF4A","#FCCDE5","#D9D9D9","#377EB8","#7FC97F","#BEAED4",
     "#FDC086","#FFFF99","#386CB0","#F0027F","#BF5B17","#666666","#1B9E77","#D95F02",
     "#7570B3","#E7298A","#66A61E","#E6AB02","#A6761D")
-p1 <- CARD.visualize.pie(proportion = CARD_obj@Proportion_CARD,spatial_location = CARD_obj@spatial_location, colors = colors)
+p1 <- CARD.visualize.pie(
+	proportion = CARD_obj@Proportion_CARD,
+	spatial_location = CARD_obj@spatial_location, 
+ 	colors = colors, 
+  	radius = 0.52) ### You can choose radius = NULL or your own radius number
 print(p1)
 ```
 Here is an example output: 

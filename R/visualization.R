@@ -138,6 +138,8 @@ return(p)
 #' @param proportion Data frame, cell type proportion estimated by CARD in either original resolution or enhanced resolution.
 #' @param spatial_location Data frame, spatial location information.
 #' @param colors Vector of color names that you want to use, if NULL, we will use the color palette "Spectral" from RColorBrewer package. 
+#' @param radius Numeric value about the radius of each pie chart, if NULL, we will calculate it inside the function.
+#' @param seed Seed number about generating the colors if users do not provide the colors, if NULL, we will generate it inside the function
 #'
 #' @import ggplot2 
 #' @importFrom RColorBrewer brewer.pal
@@ -149,7 +151,7 @@ return(p)
 #' @export
 #'
 
-CARD.visualize.pie <- function(proportion,spatial_location,colors = NULL){
+CARD.visualize.pie <- function(proportion,spatial_location,colors = NULL,radius = NULL,seed = NULL){
 res_CARD = as.data.frame(proportion)
 res_CARD = res_CARD[,mixedsort(colnames(res_CARD))]
 location = as.data.frame(spatial_location)
@@ -163,12 +165,20 @@ colorCandidate = c("#1e77b4","#ff7d0b","#ceaaa3","#2c9f2c","#babc22","#d52828","
   "#F56867", "#FEB915", "#C798EE", "#59BE86", "#7495D3",
  "#D1D1D1", "#6D1A9C", "#15821E", "#3A84E6", "#997273",
  "#787878", "#DB4C6C", "#9E7A7A", "#554236", "#AF5F3C",
- "#93796C", "#F9BD3F", "#DAB370", "#877F6C", "#268785")
+ "#93796C", "#F9BD3F", "#DAB370", "#877F6C", "#268785",
+ "#f4f1de","#e07a5f","#3d405b","#81b29a","#f2cc8f","#a8dadc","#f1faee","#f08080")
 if(is.null(colors)){
 	#colors = brewer.pal(11, "Spectral")
 	if(ncol(res_CARD) > length(colorCandidate)){
 	colors = colorRampPalette(colorCandidate)(ncol(res_CARD))
 	}else{
+
+        if(is.null(seed)){
+            iseed = 12345
+            }else{
+                iseed = seed
+            }
+        set.seed(iseed)
 		colors = colorCandidate[sample(1:length(colorCandidate),ncol(res_CARD))]
 	}
 }else{
@@ -176,8 +186,17 @@ if(is.null(colors)){
 }
 data = cbind(res_CARD,location)
 ct.select = colnames(res_CARD)
-p = suppressMessages(ggplot() + geom_scatterpie(aes(x=x, y=y,r = 0.52),data=data,
-                                cols=ct.select,color=NA) + coord_fixed(ratio = 1) + 
+if(is.null(radius)){
+    radius = (max(data$x) - min(data$x)) * (max(data$y) - min(data$y))
+    radius = radius / nrow(data)
+    radius = radius / pi
+    radius = sqrt(radius) * 0.85
+}else{
+    #### avoid the situation when the radius does not generate the correct figure
+    radius = radius
+}
+p = suppressMessages(ggplot() + geom_scatterpie(aes(x=x, y=y,r = radius),data=data,
+                                cols=ct.select,color=NA) + coord_fixed(ratio = 1*max(data$x)/max(data$y)) + 
                                 scale_fill_manual(values =  colors)+
                                 theme(plot.margin = margin(0.1, 0.1, 0.1, 0.1, "cm"),
     panel.background = element_blank(),

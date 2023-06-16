@@ -9,7 +9,8 @@ CARD.visualize.prop(
   spatial_location,
   ct.visualize = ct.visualize,
   colors = c("lightblue", "lightyellow", "red"),
-  NumCols
+  NumCols,
+  pointSize = 3
 )
 }
 \arguments{

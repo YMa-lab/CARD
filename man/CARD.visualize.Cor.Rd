@@ -9,7 +9,7 @@ CARD.visualize.Cor(proportion, colors = colors)
 \arguments{
 \item{proportion}{Data frame, cell type proportion estimated by CARD in either original resolution or enhanced resolution.}
 
-\item{colors}{Vector of color names that you want to use, if NULL, we will use the default color scale c("lightblue","lightyellow","red")}
+\item{colors}{Vector of color names that you want to use, if NULL, we will use the default color scale c("#91a28c","white","#8f2c37")}
 }
 \value{
 Returns a ggcorrplot figure.

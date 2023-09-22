@@ -38,4 +38,4 @@ Ying Ma, Xiang Zhou#. Spatially Informed Cell Type Deconvolution for Spatial Tra
 
 How to use `CARD`
 -------------------
-Details in [Tutorial](https://yingma0107.github.io/CARD/)
+Details in [Tutorial](https://yma-lab.github.io/CARD/)

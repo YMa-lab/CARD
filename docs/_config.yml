@@ -3,7 +3,7 @@ name: CARD
 
 project:
   version: 1.0.0
-  download_url: https://github.com/YingMa0107/CARD/
+  download_url: https://github.com/YMa-lab/CARD/
   download_text: Download
 
 license:
@@ -15,20 +15,20 @@ links:
     - title: GitHub
       icon: github
       brand: true
-      url: https://github.com/YingMa0107/CARD/
+      url: https://github.com/YMa-lab/CARD/
   homepage:
     - title: View on GitHub
       icon: github
       brand: true
-      url: https://github.com/YingMa0107/CARD/
+      url: https://github.com/YMa-lab/CARD/
   footer:
     - title: GitHub
       icon: github
       brand: true
-      url: https://github.com/YingMa0107/CARD/
+      url: https://github.com/YMa-lab/CARD/
     - title: Issues
       icon: bug
-      url: https://github.com/YingMa0107/CARD/issues?state=open
+      url: https://github.com/YMa-lab/CARD/issues?state=open
 
 ui:
   mode: 'auto' # 'auto', 'dark', 'light'
@@ -56,7 +56,7 @@ ui:
 
 social:
   github:
-    user: YingMa0107
+    user: YMa-lab
     repo: CARD
   twitter:
     enabled: false

@@ -18,7 +18,7 @@ install.packages('devtools')
 
 #### 2. Install `CARD`
 ```r
-devtools::install_github('YingMa0107/CARD')
+devtools::install_github('YMa-lab/CARD')
 ```
 #### 3. Load package
 ```r

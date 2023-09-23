@@ -7,7 +7,7 @@ We developed a statistical method for spatially informed cell type deconvolution
 
 Installation
 ------------
-You can install the released version of CARD from Github with the following code, for more installation details or solutions that might solve related issues (specifically MacOS system) see the [link](https://yingma0107.github.io/CARD/documentation/02_installation.html).
+You can install the released version of CARD from Github with the following code, for more installation details or solutions that might solve related issues (specifically MacOS system) see the [link](https://yma-lab.github.io/CARD/documentation/02_installation.html).
 
 ## Dependencies 
 * R version >= 4.0.0.

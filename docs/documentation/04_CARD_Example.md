@@ -166,7 +166,7 @@ Here is an example output:
 ![Example_Prop](Example_analysis_visualizeProp.png)
 
 ### 4. Visualize the proportion for two cell types
-Motivated by this github post https://github.com/YingMa0107/CARD/issues/25#issuecomment-1550231037, we added a new visualization function to visualize the distribution of two cell types on the same post.  
+Motivated by this github [issue post](https://github.com/YingMa0107/CARD/issues/25#issuecomment-1550231037), we added a new visualization function to visualize the distribution of two cell types on the same post.  
 
 ```
 ## visualize the spatial distribution of two cell types on the same plot

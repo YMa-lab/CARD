@@ -11,7 +11,7 @@ Ying Ma, Xiang Zhou#, Spatially Informed Cell Type Deconvolution for Spatial Tra
 
 Contact
 -------------------
-if you have questions, feel free to leave messages on the [github issues](https://github.com/YingMa1993/CARD/issues) or contact me through email: yingma@umich.edu
+if you have questions, feel free to leave messages on the [github issues](https://github.com/YMa-lab/CARD/issues) or contact me through email: yingma@umich.edu
 
 Our group
 -------------------

@@ -3,14 +3,14 @@ layout: page
 title: Example Analysis
 description: ~
 ---
-This tutorial is the example analysis with CARD on the human pancreatic ductal adenocarcinomas data from [Moncada et al, 2020](https://www.nature.com/articles/s41587-019-0392-8?proof=t). Before runing the tutorial, make sure that the CARD package is installed. Installation instructions see the [link](https://yingma0107.github.io/CARD/documentation/02_installation.html)
+This tutorial is the example analysis with CARD on the human pancreatic ductal adenocarcinomas data from [Moncada et al, 2020](https://www.nature.com/articles/s41587-019-0392-8?proof=t). Before runing the tutorial, make sure that the CARD package is installed. Installation instructions see the [link](https://yma-lab.github.io/CARD/documentation/02_installation.html)
 
 ## Required input data
 `CARD` requires two types of input data:
 - spatial transcriptomics count data, along with spatial location information.  
 - single cell RNAseq (scRNA-seq) count data, along with meta information indicating the cell type information and the sample (subject) information for each cell.  
 
-The example data for runing the tutorial can be downloaded in this [page](https://yingma0107.github.io/CARD/documentation/03_data.html)
+The example data for runing the tutorial can be downloaded in this [page](https://yma-lab.github.io/CARD/documentation/03_data.html)
 Here are the details about the required data input illustrated by the example datasets. 
 ### 1. spatial transcriptomics data, e.g.,
 ```r

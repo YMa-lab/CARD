@@ -34,7 +34,7 @@ All feedback, bug reports and suggestions are warmly welcomed! Please make sure 
 
 How to cite `CARD`
 -------------------
-Ying Ma, Xiang Zhou#. Spatially Informed Cell Type Deconvolution for Spatial Transcriptomics, 2021. 
+Ma, Y., Zhou, X. Spatially informed cell-type deconvolution for spatial transcriptomics. Nat Biotechnol 40, 1349–1359 (2022). https://doi.org/10.1038/s41587-022-01273-7
 
 How to use `CARD`
 -------------------

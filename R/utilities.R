@@ -111,7 +111,7 @@ if(is(sc_count,"matrix")){
 if (missing(x = sc_countMat)) {
 	stop("Please provide scRNASeq count data")
 	} else if (is.null(sample.varname) || missing(sample.varname)) {
-		sample.varname = "Sample"
+		sample.varname = "sampleID"
 		sc_meta = as.data.frame(sc_meta)
 		sc_meta$sampleID = "Sample"
 		} else if (any(rownames(x = sc_countMat) == '')) {
